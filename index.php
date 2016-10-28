@@ -76,9 +76,13 @@
 
     <header class="row" style="position:relative">
       <div style="padding: 0 30px;">
-        <h2>Les Immortels du Cercle</h2>
-        <h1>X-Wing Miniature</h1>
-        <h3>Championnat de la ligue 2016-2017</h3>
+        <h1 title="X-Wing Miniature Game">
+					<img src="img/swx-logo.png" id="swx" />
+				</h1>
+				<section class="title">
+					<h2>Les Immortels du Cercle</h2>
+	        <h3>Championnat de la ligue 2016-2017</h3>
+		 		</section>
         <button type="button" class="btn btn-default" style="position:absolute;right:30px;top:20px" onclick="document.getElementById('reportmatch').classList.add('open');">Ajouter un match</button>
       </div>
     </header>
@@ -87,12 +91,12 @@
 
 
 
-    <section id="reportmatch" class="col-sm-12" style="padding: 0 30px;">
+    <section id="reportmatch" class="col-xs-12" style="padding: 0 30px;">
       <section class="wrapper row">
-				<button type="button" class="close" onclick="this.parentNode.parentNode.classList.remove('open')" style="position:absolute;top:25px;right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" onclick="this.parentNode.parentNode.classList.remove('open')" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h3>Ajouter un match</h3>
         <form action="form/addMatch.php">
-          <section class="col-md-3">
+          <section class="col-sm-6 col-md-3">
             <div class="form-group">
               <label for="winnerselect">Vainqueur</label>
               <select id="winnerselect" class="form-control" name="winner" required>
@@ -106,11 +110,11 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="winnerscoreinput">Score</label>
+              <label for="winnerscoreinput">Score du vainqueur</label>
               <input id="winnerscoreinput" name="win_points" class="form-control" type="number" min="0" max="100" required></input>
             </div>
           </section>
-          <section class="col-md-3">
+          <section class="col-sm-6 col-md-3">
             <div class="form-group">
               <label for="loserselect">Vaincu</label>
               <select id="loserselect" class="form-control" name="loser" required>
@@ -124,14 +128,14 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="loserscoreinput">Score</label>
+              <label for="loserscoreinput">Score du vaincu</label>
               <input id="loserscoreinput" name="lose_points" class="form-control" type="number" min="0" max="100" required></input>
             </div>
           </section>
-          <section class="col-md-3">
+          <section class="col-sm-6 col-md-3">
             <p style="color:#AAA;font-size:15px;margin-top:26px;"><strong style="color:#444">Avant de valider le match</strong>, assurez vous que ce ne soit pas un doublon et que toutes les informations sont correctes.</p>
           </section>
-          <section class="col-md-3">
+          <section class="col-sm-6 col-md-3">
             <div class="form-group">
               <label for="inputmatchpassword">Mot de passe</label>
               <input id="inputmatchpassword" name="password" class="form-control" type="password" required></input>
@@ -144,7 +148,7 @@
     </section>
 
 
-    <section id="leaderboard" class="col-sm-4">
+    <section id="leaderboard" class="col-xs-12 col-md-4">
       <section class="wrapper">
         <h3>Classement</h3>
         <?php
@@ -163,10 +167,9 @@
          ?>
        </section>
     </section>
-    <section id="players" class="col-sm-8" data-page=null style="position:relative;">
-
+    <section id="players" class="col-xs-12 col-md-8" data-page="null">
       <section class="wrapper row">
-				<button type="button" class="close" onclick="this.parentNode.parentNode.dataset.page=null" style="position:absolute;top:30px;right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" onclick="this.parentNode.parentNode.dataset.page=null" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <?php
            foreach ($players as $player){
              $content= '';
@@ -217,25 +220,9 @@
         ?>
       </section>
     </section>
-		<section id="history" class="col-sm-4">
-			<section class="wrapper">
-				<h3>Historique des matchs</h3>
-				 <?php
-						foreach (array_reverse($matchs) as $match){
-							$content= '';
-							$content.='<article class="match">';
-							$content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
-							$content.='  <strong class="winner" onclick="document.getElementById(\'players\').dataset.page='.$match->winner.'">'.getPlayer($match->winner)->callsign.'</strong>';
-							$content.='  <span>a gagné '.$match->win_points.' à '.$match->lose_points.' face à</span>';
-							$content.='  <strong class="loser" onclick="document.getElementById(\'players\').dataset.page='.$match->loser.'">'.getPlayer($match->loser)->callsign.'</strong>';
-							$content.='</article>';
-							echo($content);
-						}
-				 ?>
-			</section>
-		</section>
 
-    <section id="pairings" class="col-md-12	">
+
+    <section id="pairings" class="col-md-8 hidden-xs">
       <section class="wrapper">
 	      <h3>Pairings</h3>
         <table>
@@ -264,8 +251,31 @@
              echo($content);
           ?>
         </table>
+				<p class="legend">
+					<span class="match-done">Match aller effectué</span><br />
+					<span class="match-redone">Match retour effectué</span>
+				</p>
       </section>
     </section>
+		<div class="col-xs-12 row">
+			<section id="history" class="col-xs-12 col-md-6 col-md-offset-3">
+				<section class="wrapper">
+					<h3>Historique des matchs</h3>
+					 <?php
+							foreach (array_reverse($matchs) as $match){
+								$content= '';
+								$content.='<article class="match">';
+								$content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
+								$content.='  <strong class="winner" onclick="document.getElementById(\'players\').dataset.page='.$match->winner.'">'.getPlayer($match->winner)->callsign.'</strong>';
+								$content.='  <span>a gagné '.$match->win_points.' à '.$match->lose_points.' face à</span>';
+								$content.='  <strong class="loser" onclick="document.getElementById(\'players\').dataset.page='.$match->loser.'">'.getPlayer($match->loser)->callsign.'</strong>';
+								$content.='</article>';
+								echo($content);
+							}
+					 ?>
+				</section>
+			</section>
+		</div>
 
 
     <?php
@@ -277,5 +287,6 @@
         return null;
       }
      ?>
+		 <script type="text/javascript" src="signature.js"></script>
   </body>
 </html>
