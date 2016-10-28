@@ -2,11 +2,13 @@
   {"id":0,"score":0,"margin":0,"callsign":"Leo"},
   {"id":1,"score":0,"margin":0,"callsign":"Patrick"},
   {"id":2,"score":0,"margin":0,"callsign":"Coyotte"},
-  {"id":3,"score":0,"margin":0,"callsign":"Valentin"},
-  {"id":4,"score":0,"margin":0,"callsign":"Romain"},
+  {"id":3,"score":0,"margin":0,"callsign":"Eddy"},
+  {"id":4,"score":0,"margin":0,"callsign":"Valentin"},
   {"id":5,"score":0,"margin":0,"callsign":"Afredefru"},
-  {"id":6,"score":0,"margin":0,"callsign":"Julien"},
-  {"id":7,"score":0,"margin":0,"callsign":"Shan"},
+  {"id":6,"score":0,"margin":0,"callsign":"Vianney"},
+  {"id":7,"score":0,"margin":0,"callsign":"Joaquim"},
   {"id":8,"score":0,"margin":0,"callsign":"Wlad"},
-  {"id":9,"score":0,"margin":0,"callsign":"Vianney"}
+  {"id":9,"score":0,"margin":0,"callsign":"Romain"},
+  {"id":10,"score":0,"margin":0,"callsign":"Guillaume"},
+  {"id":11,"score":0,"margin":0,"callsign":"Julien"}
 ]

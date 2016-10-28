@@ -2,25 +2,22 @@
 <html>
 	<head>
 		<title>X-Wing League 2016-2017</title>
-    <meta charset="utf-8">
+		<meta charset="utf-8">
 
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<!-- Bootstrap CDN -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <link href='css/style.css' rel='stylesheet' type='text/css'>
+		<link href='css/style.css' rel='stylesheet' type='text/css'>
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:,100,300,700,900|Roboto:100,300,700" rel="stylesheet">
-    <script type="text/javascript" src="js/points.js"></script>
 	</head>
-  <body class="container">
+
+	<body class="container">
     <?php
        // CHARGER LES .JSON ET INITIALISER LES PRINCIPAUX TABLEAUX DE DONNEES
-       $matchs = file_get_contents('data/matchs.json');
-       $matchs = (json_decode($matchs));
-       $players = file_get_contents('data/players.json');
-       $players = (json_decode($players));
+       $matchs = json_decode(file_get_contents('data/matchs.json'));
+       $players = json_decode(file_get_contents('data/players.json'));
        $pairings=[];
-       //var_dump($players);
 
        // CALCULER LE SCORE ET LA MARGE DES JOUEURS
         $i=0;
@@ -63,7 +60,8 @@
         }
 
         // ORDONNER L'ARRAY DE JOUEURS SELON LE SCORE ET LA MARGE
-        usort($players, "cmp");
+				$leaderboard = $players;
+        usort($leaderboard, "cmp");
         function cmp($a, $b){
           if ($a->score == $b->score) {
               if($a->margin == $b->margin){
@@ -73,6 +71,7 @@
           }
           return ($a->score > $b->score) ? -1 : 1;
         }
+
     ?>
 
     <header class="row" style="position:relative">
@@ -80,14 +79,19 @@
         <h2>Les Immortels du Cercle</h2>
         <h1>X-Wing Miniature</h1>
         <h3>Championnat de la ligue 2016-2017</h3>
-        <button type="button" class="btn btn-default" style="position:absolute;right:30px;top:0" onclick="document.getElementById('reportmatch').classList.add('open');">Ajouter un match</button>
+        <button type="button" class="btn btn-default" style="position:absolute;right:30px;top:20px" onclick="document.getElementById('reportmatch').classList.add('open');">Ajouter un match</button>
       </div>
     </header>
+		<?php if(isset($_GET['wrongPassword']))echo('<p class="bg-danger feedback">Mot de passe incorrect, votre requête n\'a pas été prise en compte. <button type="button" class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>'); ?>
+		<?php if(isset($_GET['addMatchSuccess']))echo('<p class="bg-success feedback">Succès, le rapport de votre match à bien été pris en comtpe. <button type="button" class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>'); ?>
+
+
 
     <section id="reportmatch" class="col-sm-12" style="padding: 0 30px;">
       <section class="wrapper row">
+				<button type="button" class="close" onclick="this.parentNode.parentNode.classList.remove('open')" style="position:absolute;top:25px;right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h3>Ajouter un match</h3>
-        <form>
+        <form action="form/addMatch.php">
           <section class="col-md-3">
             <div class="form-group">
               <label for="winnerselect">Vainqueur</label>
@@ -103,7 +107,7 @@
             </div>
             <div class="form-group">
               <label for="winnerscoreinput">Score</label>
-              <input id="winnerscoreinput" class="form-control" type="number" min="0" max="100" required></input>
+              <input id="winnerscoreinput" name="win_points" class="form-control" type="number" min="0" max="100" required></input>
             </div>
           </section>
           <section class="col-md-3">
@@ -121,7 +125,7 @@
             </div>
             <div class="form-group">
               <label for="loserscoreinput">Score</label>
-              <input id="loserscoreinput" class="form-control" type="number" min="0" max="100" required></input>
+              <input id="loserscoreinput" name="lose_points" class="form-control" type="number" min="0" max="100" required></input>
             </div>
           </section>
           <section class="col-md-3">
@@ -129,22 +133,23 @@
           </section>
           <section class="col-md-3">
             <div class="form-group">
-              <label for="inputmatchpassword">Password</label>
-              <input id="inputmatchpassword" class="form-control" type="password" required></input>
+              <label for="inputmatchpassword">Mot de passe</label>
+              <input id="inputmatchpassword" name="password" class="form-control" type="password" required></input>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
-          </section>
+            <button type="submit" name="submit" class="btn btn-primary btn-block">Envoyer</button>
+					</section>
 
         </form>
       </section>
     </section>
+
 
     <section id="leaderboard" class="col-sm-4">
       <section class="wrapper">
         <h3>Classement</h3>
         <?php
         $i=1;
-        foreach ($players as $player){
+        foreach ($leaderboard as $player){
           $content= '';
           $content.='<article class="player" onclick="document.getElementById(\'players\').dataset.page='.$player->id.'">';
           if($i<=4){$content.='  <h3>'.$i.'.</h3>';}
@@ -158,40 +163,77 @@
          ?>
        </section>
     </section>
-    <section id="history" class="col-sm-4">
-      <section class="wrapper">
-        <h3>Historique des matchs</h3>
-         <?php
-            foreach (array_reverse($matchs) as $match){
-              $content= '';
-              $content.='<article class="match">';
-              $content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
-              $content.='  <strong class="winner" onclick="document.getElementById(\'players\').dataset.page='.$match->winner.'">'.getPlayer($match->winner)->callsign.'</strong>';
-              $content.='  <span>a gagné '.$match->win_points.' à '.$match->lose_points.' face à</span>';
-              $content.='  <strong class="loser" onclick="document.getElementById(\'players\').dataset.page='.$match->loser.'">'.getPlayer($match->loser)->callsign.'</strong>';
-              $content.='</article>';
-              echo($content);
-            }
-         ?>
-      </section>
-    </section>
-    <section id="players" class="col-sm-4" data-page="">
+    <section id="players" class="col-sm-8" data-page=null style="position:relative;">
 
-      <section class="wrapper">
+      <section class="wrapper row">
+				<button type="button" class="close" onclick="this.parentNode.parentNode.dataset.page=null" style="position:absolute;top:30px;right:10px" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <?php
            foreach ($players as $player){
              $content= '';
              $content.='<article class="player" data-page="'.$player->id.'">';
-             $content.='  <h3>'.$player->callsign.'</h3>';
-             $content.='  <h4>Score : <strong>'.$player->score.'</strong></h4>';
-             $content.='  <h4>Marge de vicoire : <strong>'.$player->margin.'</strong></h4>';
-             $content.='  <h4>Matchs :</h4>';
+						 $content.=' 	<section class="col-md-6">';
+             $content.='  	<h3>'.$player->callsign.'</h3>';
+             $content.='  	<h4>Score : <strong>'.$player->score.'</strong></h4>';
+             $content.='  	<h4>Marge de vicoire : <strong>'.$player->margin.'</strong></h4>';
+						 $content.='	</section>';
+						 $content.=' 	<section class="col-md-6" style="margin-top:46px">';
+             $content.='  	<h4>Matchs :</h4>';
+
+						 foreach ($matchs as $match){
+							 if($match->winner==$player->id && $match->win_points==$match->lose_points){
+								 $content.='<article class="match bg-warning">';
+	 						 	 $content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
+	 					 		 $content.='  <span>A fait égalité ('.$match->win_points.'pts) face à</span>';
+	 							 $content.='  <strong class="loser" onclick="document.getElementById(\'players\').dataset.page='.$match->loser.'">'.getPlayer($match->loser)->callsign.'</strong>';
+	 							 $content.='</article>';
+							 }
+							 else if($match->loser==$player->id && $match->win_points==$match->lose_points){
+								 $content.='<article class="match bg-warning">';
+	 						 	 $content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
+	 					 		 $content.='  <span>A fait égalité ('.$match->win_points.'pts) face à</span>';
+	 							 $content.='  <strong class="winner" onclick="document.getElementById(\'players\').dataset.page='.$match->winner.'">'.getPlayer($match->winner)->callsign.'</strong>';
+	 							 $content.='</article>';
+							 }
+							 else if($match->winner==$player->id){
+								 $content.='<article class="match bg-success">';
+	 						 	 $content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
+	 					 		 $content.='  <span>A gagné '.$match->win_points.' à '.$match->lose_points.' face à</span>';
+	 							 $content.='  <strong class="loser" onclick="document.getElementById(\'players\').dataset.page='.$match->loser.'">'.getPlayer($match->loser)->callsign.'</strong>';
+	 							 $content.='</article>';
+							 }
+							 else if($match->loser==$player->id){
+								 $content.='<article class="match bg-danger">';
+	 						 	 $content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
+	 					 		 $content.='  <span>A perdu '.$match->win_points.' à '.$match->lose_points.' face à</span>';
+	 							 $content.='  <strong class="winner" onclick="document.getElementById(\'players\').dataset.page='.$match->winner.'">'.getPlayer($match->winner)->callsign.'</strong>';
+	 							 $content.='</article>';
+							 }
+						 }
+
+						 $content.='	</section>';
              $content.='</article>';
              echo($content);
            }
         ?>
       </section>
     </section>
+		<section id="history" class="col-sm-4">
+			<section class="wrapper">
+				<h3>Historique des matchs</h3>
+				 <?php
+						foreach (array_reverse($matchs) as $match){
+							$content= '';
+							$content.='<article class="match">';
+							$content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
+							$content.='  <strong class="winner" onclick="document.getElementById(\'players\').dataset.page='.$match->winner.'">'.getPlayer($match->winner)->callsign.'</strong>';
+							$content.='  <span>a gagné '.$match->win_points.' à '.$match->lose_points.' face à</span>';
+							$content.='  <strong class="loser" onclick="document.getElementById(\'players\').dataset.page='.$match->loser.'">'.getPlayer($match->loser)->callsign.'</strong>';
+							$content.='</article>';
+							echo($content);
+						}
+				 ?>
+			</section>
+		</section>
 
     <section id="pairings" class="col-md-12	">
       <section class="wrapper">
@@ -227,9 +269,6 @@
 
 
     <?php
-
-
-
       function getPlayer($id){
         global $players;
         foreach ($players as $e) {

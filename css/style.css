@@ -14,11 +14,13 @@ header{margin:20px 0;color: #FFF;text-shadow: 0 0 7px rgba(0,0,0,.35);}
 section.wrapper{background-color: rgba(255,255,255,.95);box-shadow:0 0 7px rgba(0,0,0,.25);border-radius:3px;margin-top:20px;padding: 1px 0 15px 0;}
 section.wrapper>*{padding:0 15px}
 
+p.feedback{padding:15px;font-size:15px;border-radius: 3px;}
+
 #reportmatch:not(.open){display:none;}
 
 /* PLAYER DISPLAY */
-#players[data-page='']{visibility:hidden;}
-#players[data-page=''] article{display:none;}
+#players:not([data-page=null])+#history{display:none;}
+#players[data-page=null]{display:none;}
 #players[data-page='0'] article.player:not([data-page='0']){display:none;}
 #players[data-page='1'] article.player:not([data-page='1']){display:none;}
 #players[data-page='2'] article.player:not([data-page='2']){display:none;}
@@ -33,12 +35,19 @@ section.wrapper>*{padding:0 15px}
 #players[data-page='11'] article.player:not([data-page='11']){display:none;}
 #players[data-page='12'] article.player:not([data-page='12']){display:none;}
 
+#players .wrapper{margin:20px 0 0 0;}
+#players article.player{padding:0}
+#players article.match{padding:5px 15px 10px 15px}
+
 /* LEADERBOARD */
 #leaderboard article.player{line-height:35px;}
 #leaderboard article.player h3,#leaderboard article.player h4{display:inline-block;width:30px;height:35px;margin:0;}
 #leaderboard article.player .points{width:50px;display:inline-block;}
-
 #leaderboard .margin,#history time{font-size:12px;color:#CCC}
+
+#history article{padding-top:5px;padding-bottom:10px;}
+#history article:nth-child(even){background:rgba(0,0,0,.03)}
+
 
 #pairings .wrapper{padding-left:15px;padding-right:15px;}
 #pairings table tr:first-of-type{display:none}
@@ -48,11 +57,11 @@ section.wrapper>*{padding:0 15px}
 #pairings td:not([data='null']){border:2px solid white}
 #pairings td[data='null']{background:transparent;}
 #pairings td[data='1']{background:#4098d8;opacity:.6;}
-#pairings td[data='2']{background:#4098d8;opacity:.8;}
+#pairings td[data='2'],
 #pairings td[data='3'],
 #pairings td[data='4'],
 #pairings td[data='5'],
 #pairings td[data='6'],
 #pairings td[data='7'],
-#pairings td[data='8']{background:#4098d8;opacity:1;}
-#pairings td[data='0']{background:#ef8383}
+#pairings td[data='8']{background:#4098d8;opacity:.8;}
+#pairings td[data='0']{background:#ef8383;opacity:.8;}
