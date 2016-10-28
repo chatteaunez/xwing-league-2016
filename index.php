@@ -277,6 +277,10 @@
 			</section>
 		</div>
 
+		<footer class="col-xs-12 row">
+			Conçu et développé par Léo Catonnet @ <a href="http://ploy.design" target="blank">ploy!</a>. <br />
+			Sources accessibles sur <a href="https://github.com/leo-catonnet/xwing-league-2016" target="blank">GitHub</a>.
+		</footer>
 
     <?php
       function getPlayer($id){

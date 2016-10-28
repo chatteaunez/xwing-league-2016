@@ -10,13 +10,16 @@ html{
 
 
 
-body{background:transparent;padding-bottom:50px}
+body{background:transparent;}
 button.close{position:absolute;top:10px;right:0;z-index:200}
 
 header{margin:20px 0;color: #FFF;text-shadow: 0 0 8px rgba(0,0,0,.8);text-align:center;}
 #swx{width:100%;height:auto;max-width:420px;padding:0 15px;box-sizing:border-box;}
 section.wrapper{position:relative;background-color:rgba(255,255,255,.95);box-shadow:0 0 7px rgba(0,0,0,.25);border-radius:3px;margin-top:30px;padding: 1px 0 15px 0;}
 section.wrapper>*{padding:0 15px}
+
+footer{text-align:center;padding:50px 0 14px 0;color:#FFF;text-shadow: 0 0 4px rgba(0,0,0,.8);font-size: 16px}
+a{color:#939393}a:hover{color:#888}
 
 p.feedback{padding:15px;font-size:15px;border-radius: 3px;}
 p.feedback button{position:static}
