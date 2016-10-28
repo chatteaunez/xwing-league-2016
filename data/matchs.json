@@ -1,1 +1,9 @@
-[{"winner":0,"loser":1,"win_points":14,"lose_points":0,"timestamp":1477527450},{"winner":"3","loser":"8","win_points":"100","lose_points":"0","timestamp":1477672414}]
+[
+  {
+      "winner":0,
+      "loser":1,
+      "win_points":14,
+      "lose_points":0,
+      "timestamp":1477527450
+  }
+]
