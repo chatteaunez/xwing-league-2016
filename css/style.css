@@ -39,3 +39,20 @@ section.wrapper>*{padding:0 15px}
 #leaderboard article.player .points{width:50px;display:inline-block;}
 
 #leaderboard .margin,#history time{font-size:12px;color:#CCC}
+
+#pairings .wrapper{padding-left:15px;padding-right:15px;}
+#pairings table tr:first-of-type{display:none}
+#pairings table tr:last-of-type th:last-of-type{display:none}
+#pairings table tr:last-of-type th{text-align:center;}
+#pairings th, #pairings td {height: 40px;width:80px;}
+#pairings td:not([data='null']){border:2px solid white}
+#pairings td[data='null']{background:transparent;}
+#pairings td[data='1']{background:#4098d8;opacity:.6;}
+#pairings td[data='2']{background:#4098d8;opacity:.8;}
+#pairings td[data='3'],
+#pairings td[data='4'],
+#pairings td[data='5'],
+#pairings td[data='6'],
+#pairings td[data='7'],
+#pairings td[data='8']{background:#4098d8;opacity:1;}
+#pairings td[data='0']{background:#ef8383}

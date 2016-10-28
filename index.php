@@ -193,6 +193,38 @@
       </section>
     </section>
 
+    <section id="pairings" class="col-md-12	">
+      <section class="wrapper">
+	      <h3>Pairings</h3>
+        <table>
+          <?php
+             $i=0;
+             $content= '';
+             foreach ($players as $player){
+               $content.='<tr><th>'.$player->callsign.'</th>';
+                  for ($j=0; $j <$i+1 ; $j++) {
+                    if ($i==$j) {$content.='<td data="null"></td>';}
+                    else{
+                      $pairing=[$j,$i];
+											$nbEncounter=0;
+                      foreach ($pairings as $k => $v) {if($v==$pairing){$nbEncounter++;}}
+                      $content.='<td data="'.$nbEncounter.'"></td>';
+                    }
+                  }
+                $content.='</tr>';
+								$i++;
+             }
+             $content.='<tr><th></th>';
+             foreach ($players as $player){
+               $content.='<th>'.$player->callsign.'</th>';
+             }
+             $content.='</tr>';
+             echo($content);
+          ?>
+        </table>
+      </section>
+    </section>
+
 
     <?php
 
