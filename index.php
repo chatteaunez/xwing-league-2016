@@ -3,6 +3,7 @@
 	<head>
 		<title>X-Wing League 2016-2017</title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<!-- Bootstrap CDN -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -257,7 +258,7 @@
 				</p>
       </section>
     </section>
-		<div class="col-xs-12 row">
+		<div class="col-xs-12 row" style="margin-left: 1px;">
 			<section id="history" class="col-xs-12 col-md-6 col-md-offset-3">
 				<section class="wrapper">
 					<h3>Historique des matchs</h3>
@@ -277,7 +278,7 @@
 			</section>
 		</div>
 
-		<footer class="col-xs-12 row">
+		<footer class="col-xs-12 row" style="margin-left: 1px;">
 			Conçu et développé par Léo Catonnet @ <a href="http://ploy.design" target="blank">ploy!</a>. <br />
 			Sources accessibles sur <a href="https://github.com/leo-catonnet/xwing-league-2016" target="blank">GitHub</a>.
 		</footer>
