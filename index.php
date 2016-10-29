@@ -84,7 +84,7 @@
 					<h2>Les Immortels du Cercle</h2>
 	        <h3>Championnat de la ligue 2016-2017</h3>
 		 		</section>
-        <button type="button" class="btn btn-default" style="position:absolute;right:30px;top:20px" onclick="document.getElementById('reportmatch').classList.add('open');">Ajouter un match</button>
+        <button type="button" class="btn btn-default" onclick="document.getElementById('reportmatch').classList.add('open');">Ajouter un match</button>
       </div>
     </header>
 		<?php if(isset($_GET['wrongPassword']))echo('<p class="bg-danger feedback">Mot de passe incorrect, votre requête n\'a pas été prise en compte. <button type="button" class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>'); ?>
@@ -278,7 +278,7 @@
 			</section>
 		</div>
 
-		<footer class="col-xs-12 row" style="margin-left: 1px;">
+		<footer class="col-xs-12 row" style="margin-left:1px;">
 			Conçu et développé par Léo Catonnet @ <a href="http://ploy.design" target="blank">ploy!</a>. <br />
 			Sources accessibles sur <a href="https://github.com/leo-catonnet/xwing-league-2016" target="blank">GitHub</a>.
 		</footer>
