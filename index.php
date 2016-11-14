@@ -183,7 +183,7 @@
 						 $content.=' 	<section class="col-md-6" style="margin-top:46px">';
              $content.='  	<h4>Matchs :</h4>';
 
-						 foreach ($matchs as $match){
+						 foreach (array_reverse($matchs) as $match){
 							 if($match->winner==$player->id && $match->win_points==$match->lose_points){
 								 $content.='<article class="match bg-warning">';
 	 						 	 $content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
