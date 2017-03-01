@@ -268,7 +268,8 @@
 								$content.='<article class="match">';
 								$content.='  <time>'.date('j\/n',$match->timestamp).'</time><br />';
 								$content.='  <strong class="winner" onclick="document.getElementById(\'players\').dataset.page='.$match->winner.'">'.getPlayer($match->winner)->callsign.'</strong>';
-								$content.='  <span>a gagné '.$match->win_points.' à '.$match->lose_points.' face à</span>';
+								if($match->win_points==$match->lose_points){$content.='  <span>a fait égalité '.$match->win_points.' à '.$match->lose_points.' face à</span>';}
+								else{$content.='  <span>a gagné '.$match->win_points.' à '.$match->lose_points.' face à</span>';}
 								$content.='  <strong class="loser" onclick="document.getElementById(\'players\').dataset.page='.$match->loser.'">'.getPlayer($match->loser)->callsign.'</strong>';
 								$content.='</article>';
 								echo($content);
