@@ -70,8 +70,8 @@ p.feedback button{position:static}
 #pairings table tr:first-of-type{display:none}
 #pairings table tr:last-of-type th:last-of-type{display:none}
 #pairings table tr:last-of-type th{text-align:center;}
-#pairings th, #pairings td {height:30px;width:calc(100% /12);box-sizing:border-box;font-size:11px}
-#pairings td:not([data='null']){border:2px solid white}
+#pairings th, #pairings td {height:30px;width:calc(100% /12);box-sizing:border-box;font-size:11px;display:inline-block;}
+#pairings td:not([data='null']){border:1px solid white;}
 #pairings td[data='null']{background:transparent;}
 #pairings td[data='1']{background:#4098d8;opacity:.55;}
 #pairings td[data='2'],
